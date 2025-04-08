@@ -1,12 +1,12 @@
 from flask import Flask, request
 import telegram
 import os
+from dotenv import load_dotenv
 
-# 🔑 Вставь свой токен от BotFather
-TOKEN = '7842549053:AAG9lc6OMYgSplgy40xq1fWh7zX2_G8HA-0'
+load_dotenv()  # Загружаем .env
 
-# 🔗 Ссылка на твой WebApp на GitHub Pages
-WEBAPP_URL = 'https://azc0n.github.io/fpi-pass/'
+TOKEN = os.environ['TOKEN']
+WEBAPP_URL = os.environ['WEBAPP_URL']
 
 bot = telegram.Bot(token=TOKEN)
 app = Flask(__name__)
@@ -35,6 +35,5 @@ def index():
     return 'FPI bot is running'
 
 if __name__ == '__main__':
-    # 🛠️ Render ожидает, что приложение будет слушать 0.0.0.0 и порт из переменной окружения
     port = int(os.environ.get('PORT', 10000))
     app.run(host='0.0.0.0', port=port)
